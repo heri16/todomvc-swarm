@@ -14,6 +14,7 @@ module.exports = window.TodoApp = (function(superclass){
     var prototype = extend$((import$(S, superclass), S), superclass).prototype, constructor = S;
 
     function S(ssnid, itemId){
+        superclass.apply(this, arguments);
         this.path = [];
         this.ssnid = ssnid;
         this.moving = false;
