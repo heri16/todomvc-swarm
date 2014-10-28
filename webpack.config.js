@@ -14,7 +14,7 @@ console.log('reSourceRoute', reSourceRoute);
 module.exports = {
   entry: {
     lib: [
-      'react',
+      'swarm',
       // 'font-awesome-webpack',
       'webpack-dev-server/client', 
       'webpack/hot/dev-server',     
@@ -28,7 +28,7 @@ module.exports = {
     //  '../client/css/main.styl'
     // ]    
   },
-  // devtool: 'source-map',
+  devtool: 'source-map',
   output: {
     path: path.join(__dirname, 'output'),
     // filename: '[name].bundle.js',
@@ -36,6 +36,9 @@ module.exports = {
     chunkFilename: '[name].part.js'
     // namedChunkFilename: '[name].chunk.js'
 
+  },
+  externals: {
+    react: 'React'
   },
   resolveLoader: {
     modulesDirectories: ['..', 'node_modules']
