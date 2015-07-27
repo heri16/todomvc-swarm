@@ -46,6 +46,7 @@ var MainSection = React.createClass({
             return (
                 <TodoItemView
                     key={itemId}
+                    spec={itemId}
                     listId={todoList._id}
                     selected={selectedItem === itemId}
                     tabIndex={index}

@@ -17,7 +17,7 @@ var nodejsx = require('node-jsx');
 nodejsx.install();
 
 var React = require('react');
-var TodoAppView = require('./view/TodoAppView.jsx');
+var TodoAppView = React.createFactory(require('./view/TodoAppView.jsx'));
 
 // Swarm
 var Swarm = require('swarm');
@@ -71,9 +71,10 @@ app.get(/[/+A-Za-z0-9_~]*/, function (req, res) {
     res.write(htmlTemplate.head);
     router.load(route, function (path) {
         res.write(
-            React.renderComponentToString(
+            React.renderToString(
                 TodoAppView({
                     key: 'TodoApp',
+                    spec: 'TodoApp',
                     app: {path: path}
                 })
             )

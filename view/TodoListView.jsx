@@ -28,7 +28,6 @@ var Header = require('./Header.jsx');
 var MainSection = require('./MainSection.jsx');
 var Footer = require('./Footer.jsx');
 
-
 var TodoListView = React.createClass({
 
     mixins: [Swarm.ReactMixin],

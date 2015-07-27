@@ -28,7 +28,7 @@ var TodoItem = require('./model/TodoItem');
 Swarm.env.debug = false;
 var isEmbed = (window.parent!==window);
 
-var TodoAppView = require('./view/TodoAppView.jsx');
+var TodoAppView = React.createFactory(require('./view/TodoAppView.jsx'));
 
 function TodoApp (ssnid, listId) {
     this.path = [];
@@ -100,9 +100,10 @@ TodoApp.prototype.refresh = function (path) {
         self.active = true;
     }
     // rerender DOM
-    React.renderComponent(
-        TodoAppView ({
+    React.render(
+        TodoAppView({
             key: 'TodoApp',
+            spec: 'TodoApp',
             app: self
         }),
         document.getElementById('todoapp')

@@ -55,6 +55,7 @@ var TodoAppView = React.createClass({
             return (
                 <TodoListView
                     key={pathEntry.listId}
+                    spec={pathEntry.listId}
                     selectedItem={pathEntry.itemId}
                     depth={index}
                     app={this.props.app}

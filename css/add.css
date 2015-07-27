@@ -93,10 +93,15 @@ input:focus {
     color: #aaa;
 }
 
+.todo-list ul li .view div {
+    display: inline-block;
+    vertical-align: top;
+}
+
 span.bookmark {
     position: absolute;
     right: -5px;
-    top: -3px;
+    top: 3px;
     font-size: 20px;
     background: #ff9;
     box-shadow: 1px 1px 1px grey;
