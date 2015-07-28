@@ -15,8 +15,9 @@
  *
  * @jsx React.DOM
  */
+"use strict";
 
-var React = require('react');
+var React = require('react'); //React.addons = require('react/addons').addons;
 var Swarm = require('swarm');
 var Spec = Swarm.Spec;
 
@@ -100,7 +101,7 @@ TodoApp.prototype.refresh = function (path) {
         self.active = true;
     }
     // rerender DOM
-    React.render(
+    var rootInstance = React.render(
         TodoAppView({
             key: 'TodoApp',
             spec: 'TodoApp',
@@ -126,6 +127,18 @@ TodoApp.prototype.refresh = function (path) {
         link.setAttribute('href', newLink);
         link.innerHTML = 'link';
     }
+    // Required by react-hot-loader for external React bundle
+    if (module.hot) {
+        require.ensure(["react-hot-loader/Injection"], function(require) {
+            require('react-hot-loader/Injection').RootInstanceProvider.injectProvider({
+                getRootInstances: function () {
+                    // Help React Hot Loader figure out the root component instances on the page:
+                    return [rootInstance];
+                }
+            });
+        });
+    }
+
 };
 
 // Suddenly jump to some entry in some list.

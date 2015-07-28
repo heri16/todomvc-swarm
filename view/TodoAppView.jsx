@@ -20,9 +20,14 @@
  * This component operates as a "Controller-View".  It listens for changes in
  * the TodoStore and passes the new data to its children.
  */
+"use strict";
 
 var React = require('react');
 var Swarm = require('swarm');
+
+var mui = require('material-ui');
+var ThemeManager = new mui.Styles.ThemeManager();
+
 var TodoListView = require('./TodoListView.jsx');
 
 var TodoAppView = React.createClass({
@@ -68,6 +73,18 @@ var TodoAppView = React.createClass({
                 {lists}
             </div>
         );
+    },
+
+    // Material-UI: Important!
+    childContextTypes: {
+        muiTheme: React.PropTypes.object
+    },
+
+    // Material-UI: Important!
+    getChildContext: function() { 
+        return {
+            muiTheme: ThemeManager.getCurrentTheme()
+        };
     }
 
 });

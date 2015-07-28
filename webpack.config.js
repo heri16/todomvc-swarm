@@ -13,32 +13,40 @@ var reSourceRoute = RegExp.escape(sourceRoot);
 console.log('reSourceRoute', reSourceRoute);
 module.exports = {
   entry: {
-    lib: [
+    vendor: [
       'swarm',
-      // 'font-awesome-webpack',
-      'webpack-dev-server/client', 
-      'webpack/hot/dev-server',     
+      'material-ui',
       'react-hot-loader'
+      // 'font-awesome-webpack'
     ],
-    bundle:[    
+    dev: [
+      'webpack-dev-server/client', 
+      'webpack/hot/only-dev-server'
+    ],
+    app:[    
       './TodoApp'
     ]
     // ,
     // style:[    
     //  '../client/css/main.styl'
-    // ]    
+    // ]
   },
   devtool: 'source-map',
+  devServer: {
+    proxy: {
+      '*': 'http://localhost:8000'
+    }
+  },
   output: {
-    path: path.join(__dirname, 'output'),
-    // filename: '[name].bundle.js',
+    path: path.join(__dirname, 'dist'),
+    filename: '[name].bundle.js',
     publicPath: "http://localhost:8080/",
     chunkFilename: '[name].part.js'
-    // namedChunkFilename: '[name].chunk.js'
-
   },
   externals: {
-    react: 'React'
+    'react': 'React',
+    'react/addons': 'React',
+    'react/lib/ReactMount': 'undefined'
   },
   resolveLoader: {
     modulesDirectories: ['..', 'node_modules']
@@ -50,7 +58,7 @@ module.exports = {
     loaders: [
       { test: /\.css$/, loaders: ["style-loader", "css-loader"] },
       { test: /\.styl$/, loader: 'style-loader!css-loader!stylus-loader' },
-      { test: /\.jsx$/, loaders: ['react-hot', 'jsx'] },
+      { test: /\.jsx$/, loaders: ['react-hot', 'jsx?harmony'] },
       
       { test: /\.woff(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "url-loader?limit=10000&minetype=application/font-woff" },
       { test: /\.(ttf|eot|svg)(\?v=[0-9]\.[0-9]\.[0-9])?$/, loader: "file-loader" },
@@ -68,16 +76,10 @@ module.exports = {
       // , 
       // { test: new RegExp(reSourceRoute + '.*\\.js$'), loaders: ['simple-hot'] }
 
-
-
     ]
   }, 
   plugins: [    
-    // new webpack.optimize.CommonsChunkPlugin("style.js", ["style"]),
-    new webpack.optimize.CommonsChunkPlugin("lib", "lib.js")
-    // new webpack.optimize.CommonsChunkPlugin("app.js", ["bundle"]),
-
-    
+    new webpack.optimize.CommonsChunkPlugin("vendor", "vendor.bundle.js")
 
     // new ExtractTextPlugin("[name].css")
   ]

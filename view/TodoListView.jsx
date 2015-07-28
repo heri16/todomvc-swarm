@@ -20,6 +20,7 @@
  * This component operates as a "Controller-View".  It listens for changes in
  * the TodoStore and passes the new data to its children.
  */
+"use strict";
 
 var React = require('react');
 var Swarm = require('swarm');
