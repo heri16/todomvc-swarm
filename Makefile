@@ -8,7 +8,7 @@ all: libs dist todo
 libs:
 	npm install
 	if [ ! -e dist/ ]; then mkdir dist; fi
-	cp node_modules/react/dist/react.min.js dist/react.min.js
+	cp node_modules/react/dist/react*.min.js dist/
 
 dist: $(TARGETS)
 

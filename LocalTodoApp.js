@@ -1,3 +1,5 @@
+"use strict";
+
 var Swarm    = require('swarm');
 var Spec     = Swarm.Spec;
 var TodoList = require('./model/TodoList');
